@@ -10,6 +10,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    
 </head>
 
 <body>
@@ -278,26 +280,63 @@ What I Offer:<br>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form action="https://formspree.io/f/opiyodavid948@gmail.com" method="POST">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="subject" placeholder="Subject">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+  <form action="https://formspree.io/f/xgvykqoe" method="POST">
+    <input type="hidden" name="_subject" value="New message from portfolio contact form">
+   <input type="hidden" name="_replyto" value="opiyodavid948@gmail.com">
+    
+    <div class="form-group">
+      <input type="text" name="name" placeholder="Your Name" required>
+    </div>
+    
+    <div class="form-group">
+      <input type="email" name="_replyto" placeholder="Your Email" required>
+    </div>
+    
+    <div class="form-group">
+      <input type="text" name="_subject" placeholder="Message Subject">
+    </div>
+    
+    <div class="form-group">
+      <textarea name="message" placeholder="Your Message" required></textarea>
+    </div>
+    
+    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+    <button type="submit" class="btn">Send Message</button>
+  </form>
 
-        
+  <script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+  
+  try {
+    const response = await fetch(e.target.action, {
+      method: 'POST',
+      body: new FormData(e.target),
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (response.ok) {
+      alert('Message sent successfully!');
+      e.target.reset();
+    } else {
+      throw new Error('Form submission failed');
+    }
+  } catch (error) {
+    alert('Error sending message. Please try again later.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  }
+});
+  </script>
+  
+</div>
+
+            </div>
+        </section>  
     </main>
 
     <script>
